@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jantung 3D Interaktif</title>
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
+    <style>
+        /* Mengatur agar layar penuh & tombol cantik */
+        body { margin: 0; background-color: #f0f0f0; font-family: sans-serif; }
+        model-viewer { width: 100vw; height: 100vh; }
+        
+        /* Desain Tombol Keterangan (Hotspot) */
+        .hotspot {
+            display: block;
+            width: 20px;
+            height: 20px;
+            border-radius: 10px;
+            border: none;
+            background-color: #FF0000; /* Merah */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+            cursor: pointer;
+        }
+        .hotspot:not([data-visible]) { background: transparent; border: 4px solid #fff; box-shadow: none; width: 32px; height: 32px; pointer-events: none; }
+        .hotspot:focus { outline: none; }
+        
+        /* Desain Tulisan Keterangan */
+        .annotation {
+            background: #ffffff;
+            position: absolute;
+            transform: translate(10px, 10px);
+            border-radius: 10px;
+            padding: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+            display: none; /* Sembunyikan dulu */
+            font-weight: bold;
+            font-size: 14px;
+            color: #333;
+            width: max-content;
+        }
+    </style>
+</head>
+<body>
+
+    <model-viewer 
+        src="./model.glb" 
+        ar 
+        ar-modes="webxr scene-viewer quick-look" 
+        camera-controls 
+        auto-rotate
+        shadow-intensity="1">
+
+        <button class="hotspot" slot="hotspot-1" data-position="0 0.2 0.1" data-normal="0 0 1">
+            <div class="annotation">Aorta (Pembuluh Besar)</div>
+        </button>
+
+        <button class="hotspot" slot="hotspot-2" data-position="0 -0.2 0.1" data-normal="0 0 1">
+            <div class="annotation">Bilik Jantung</div>
+        </button>
+        
+    </model-viewer>
+
+    <script>
+        const hotspots = document.querySelectorAll('.hotspot');
+        hotspots.forEach(hotspot => {
+            hotspot.addEventListener('click', () => {
+                const annotation = hotspot.querySelector('.annotation');
+                // Tutup semua yang lain dulu
+                document.querySelectorAll('.annotation').forEach(el => el.style.display = 'none');
+                // Tampilkan yang diklik
+                annotation.style.display = 'block';
+            });
+        });
+    </script>
+</body>
+</html>
