@@ -1,14 +1,60 @@
-<model-viewer src="model.glb" ar ar-modes="webxr scene-viewer quick-look" camera-controls tone-mapping="neutral" poster="poster.webp" shadow-intensity="1" auto-rotate>
-    <button class="Hotspot" slot="hotspot-1" data-position="0.3233123373371545m 0.5364732719288592m -0.22168406367781146m" data-normal="0.810937677714259m 0.09854518082159235m 0.5767745921937305m" data-visibility-attribute="visible">
-        <div class="HotspotAnnotation">Arkus Aorta Deskripsi: Saluran utama yang mendistribusikan darah kaya oksigen dari jantung ke seluruh tubuh. Memiliki percabangan menuju kepala dan anggota gerak atas.</div>
-    </button>
-    <div class="progress-bar hide" slot="progress-bar">
-        <div class="update-bar"></div>
-    </div>
-    <button slot="ar-button" id="ar-button">
-        View in your space
-    </button>
-    <div id="ar-prompt">
-        <img src="https://modelviewer.dev/shared-assets/icons/hand.png">
-    </div>
-</model-viewer>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AR Sistem Peredaran Darah</title>
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.3.0/model-viewer.min.js"></script>
+    <style>
+        /* Desain Titik Hotspot */
+        .Hotspot {
+            background: #ffffff;
+            border-radius: 50%;
+            border: 2px solid #ff0000;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+            cursor: pointer;
+            height: 20px;
+            width: 20px;
+        }
+        /* Desain Kotak Tulisan Penjelasan */
+        .HotspotAnnotation {
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            color: #333333;
+            display: block;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            font-weight: bold;
+            padding: 10px;
+            position: absolute;
+            left: 25px;
+            top: -20px;
+            width: 200px;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body style="margin: 0;">
+
+    <model-viewer 
+        src="model.glb" 
+        ar 
+        ar-modes="webxr scene-viewer quick-look" 
+        camera-controls 
+        shadow-intensity="1" 
+        auto-rotate 
+        style="width: 100%; height: 100vh;">
+
+        <button class="Hotspot" slot="hotspot-1" 
+            data-position="0.3233123373371545m 0.5364732719288592m -0.22168406367781146m" 
+            data-normal="0.810937677714259m 0.09854518082159235m 0.5767745921937305m">
+            <div class="HotspotAnnotation">
+                Arkus Aorta: Saluran utama yang mendistribusikan darah kaya oksigen ke seluruh tubuh.
+            </div>
+        </button>
+
+    </model-viewer>
+
+</body>
+</html>
